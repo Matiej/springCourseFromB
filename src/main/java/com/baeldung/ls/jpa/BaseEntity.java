@@ -12,7 +12,7 @@ import static java.util.UUID.randomUUID;
 
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
-public abstract class BasieEntity {
+public abstract class BaseEntity {
 
     @Id
     @GeneratedValue
@@ -69,7 +69,7 @@ public abstract class BasieEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        BasieEntity that = (BasieEntity) o;
+        BaseEntity that = (BaseEntity) o;
         return version == that.version && Objects.equals(id, that.id) && Objects.equals(UUID, that.UUID);
     }
 

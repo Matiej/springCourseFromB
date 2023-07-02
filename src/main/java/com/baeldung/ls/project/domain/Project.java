@@ -1,14 +1,19 @@
 package com.baeldung.ls.project.domain;
 
-import com.baeldung.ls.jpa.BasieEntity;
-import jakarta.persistence.Entity;
+import com.baeldung.ls.jpa.BaseEntity;
+import com.baeldung.ls.task.domain.Task;
+import jakarta.persistence.*;
 
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
-public class Project extends BasieEntity {
+public class Project extends BaseEntity {
 
     private String name;
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "project_id")
+    private Set<Task> tasks;
 
     public Project() {
     }
