@@ -1,5 +1,6 @@
 package com.baeldung.ls.project.database;
 
+import com.baeldung.ls.project.ProjectRepositoryTestBase;
 import com.baeldung.ls.project.domain.Project;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -9,29 +10,30 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.test.annotation.DirtiesContext;
 
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.stream.Collectors;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasItem;
+import static org.hamcrest.Matchers.hasSize;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-class IProjectRepositoryIntegrationTest {
+class IProjectRepositoryIntegrationTest extends ProjectRepositoryTestBase {
     private static final Logger LOG = LoggerFactory.getLogger(IProjectRepositoryIntegrationTest.class);
     private static final LocalDate TEST_PROJECT_DATE = LocalDate.now();
 
     @Autowired
     private IProjectRepository repository;
-
-    @BeforeEach
-    void setUp(TestInfo info) {
-        LOG.info("Starting tesT: {}", info.getDisplayName());
-    }
 
     @Test
     @DisplayName("Should save() method save project with success")
@@ -109,7 +111,69 @@ class IProjectRepositoryIntegrationTest {
         assertThat(retrivedProjectList, hasItem(myOtherDateProject));
     }
 
-    private static Project prepareMyTestProject() {
-        return new Project("My test Project");
+    @Test
+    @DisplayName("should findAll() paginated method return two pages of size 5 from 152 total elements")
+    public void givenDataCreated_whenFindAllPaginated_thenSuccess() {
+        //given
+        List<Project> projectList = prepareTestProjects(152);
+        List<Project> savedProjects = repository.saveAll(projectList);
+
+        //when
+        Page<Project> retrievedProjects = repository.findAll(PageRequest.of(2, 5));
+
+        //then
+        assertThat(retrievedProjects.getContent(), hasSize(5));
+        assertEquals(retrievedProjects.getTotalPages(), 2);
+        assertEquals(retrievedProjects.getTotalElements(), 152L);
+
     }
+
+    @Test
+    @DisplayName("should findAll() sorted method return two pages of size 5 from 152 total elements")
+    public void givenDataCreated_whenFindAllSorted_thenSuccess() {
+        //given
+        List<Project> projectList = prepareTestProjects(152);
+        List<Project> savedProjects = repository.saveAll(projectList);
+
+        //when
+        List<Project> retrievedProjects = repository.findAll(Sort.by(Sort.Order.desc("id")));
+
+        //then
+        assertThat(retrievedProjects, hasSize(152));
+        List<Project> copiedSavedProjectsList = new ArrayList<>(savedProjects);
+        assertNotEquals(copiedSavedProjectsList, retrievedProjects);
+        copiedSavedProjectsList.sort(Comparator.comparing(Project::getId, Comparator.reverseOrder()));
+        assertEquals(retrievedProjects, copiedSavedProjectsList);
+
+
+    }
+
+    @Test
+    @DisplayName("should findAll() sorted and paginated method return two pages of size 5 from 152 total elements")
+    public void givenDataCreated_whenFindAllSortedPaginated_thenSuccess() {
+        //given
+        List<Project> projectList = prepareTestProjects(152);
+        List<Project> savedProjects = repository.saveAll(projectList);
+
+        //when
+        Page<Project> retrievedProjects = repository.findAll(PageRequest.of(2, 5, Sort.by(Sort.Order.desc("id"))));
+
+        //then
+        assertThat(retrievedProjects.getContent(), hasSize(5));
+        assertEquals(retrievedProjects.getTotalPages(), 2);
+        assertEquals(retrievedProjects.getTotalElements(), 152L);
+
+        List<Project> copiedSavedProjectsLimitedAndSortedDesc = new ArrayList<>(savedProjects
+                .stream()
+                .sorted(Comparator.comparing(Project::getId).reversed())
+                .limit(10)
+                .toList());
+        List<Project> allRetrievedSortedProjects = retrievedProjects.get().toList();
+        
+        assertEquals(allRetrievedSortedProjects, copiedSavedProjectsLimitedAndSortedDesc);
+
+
+    }
+
+
 }
