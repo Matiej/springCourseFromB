@@ -6,7 +6,7 @@ import java.util.List;
 import com.baeldung.ls.project.domain.Project;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface IProjectRepository extends JpaRepository<Project, Long> {
+public interface IProjectRepository extends JpaRepository <Project, Long> {
 
 //    Optional<Project> findById(Long id);
 //
