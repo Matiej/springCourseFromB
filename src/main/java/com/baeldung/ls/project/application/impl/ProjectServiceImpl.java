@@ -1,12 +1,11 @@
 package com.baeldung.ls.project.application.impl;
 
-import java.util.Optional;
-
+import com.baeldung.ls.project.application.IProjectService;
+import com.baeldung.ls.project.database.IProjectRepository;
+import com.baeldung.ls.project.domain.Project;
 import org.springframework.stereotype.Service;
 
-import com.baeldung.ls.project.domain.Project;
-import com.baeldung.ls.project.database.IProjectRepository;
-import com.baeldung.ls.project.application.IProjectService;
+import java.util.Optional;
 
 @Service
 public class ProjectServiceImpl implements IProjectService {
