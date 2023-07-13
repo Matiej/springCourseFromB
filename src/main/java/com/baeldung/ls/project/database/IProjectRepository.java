@@ -8,9 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface IProjectRepository extends JpaRepository <Project, Long> {
 
-//    Optional<Project> findById(Long id);
-//
-//    Project save(Project project);
+
 
     List<Project> findByName(String name);
     List<Project> findByCreatedAtBetween(LocalDate start, LocalDate end);
