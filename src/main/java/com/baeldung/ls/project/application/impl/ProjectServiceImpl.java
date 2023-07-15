@@ -3,17 +3,48 @@ package com.baeldung.ls.project.application.impl;
 import com.baeldung.ls.project.application.IProjectService;
 import com.baeldung.ls.project.database.IProjectRepository;
 import com.baeldung.ls.project.domain.Project;
+import com.baeldung.ls.task.TaskNotSavedException;
+import com.baeldung.ls.task.application.TaskService;
+import com.baeldung.ls.task.domain.Task;
+import com.baeldung.ls.task.domain.TaskStatus;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class ProjectServiceImpl implements IProjectService {
 
-    private IProjectRepository projectRepository;
+    private final IProjectRepository projectRepository;
+    private final TaskService taskService;
 
-    public ProjectServiceImpl(IProjectRepository projectRepository) {
+    public ProjectServiceImpl(IProjectRepository projectRepository, TaskService taskService) {
         this.projectRepository = projectRepository;
+        this.taskService = taskService;
+    }
+
+
+    @Transactional(rollbackOn = TaskNotSavedException.class)
+    @Override
+    public void createProjectWithTask() throws TaskNotSavedException {
+        //all these operations can be executed by just saving Project entity with tasks in it.
+        //here only to show steps
+        Project project = new Project("Project_1");
+        Project savedProject = projectRepository.save(project);
+
+        Task task1 = new Task("Task_2", "Task 2 for super Project1", LocalDate.now().plusWeeks(4), TaskStatus.NEW);
+//        Task savedTask = taskService.save(task1);
+        Task savedTask = taskService.saveWithCustomCheckedException(task1);
+
+        Set<Task> tasks = new HashSet<>();
+        tasks.add(savedTask);
+
+        savedProject.setTasks(tasks);
+        Project savedProjectWithTasks = projectRepository.save(savedProject);
     }
 
     @Override
@@ -24,6 +55,11 @@ public class ProjectServiceImpl implements IProjectService {
     @Override
     public Project save(Project project) {
         return projectRepository.save(project);
+    }
+
+    @Override
+    public List<Project> findAll() {
+        return projectRepository.findAll();
     }
 
 }
