@@ -8,8 +8,6 @@ import java.util.List;
 
 public interface IProjectRepository extends JpaRepository <Project, Long> {
 
-
-
     List<Project> findByName(String name);
     List<Project> findByCreatedAtBetween(LocalDate start, LocalDate end);
 }
