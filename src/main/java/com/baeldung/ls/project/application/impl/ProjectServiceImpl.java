@@ -1,6 +1,7 @@
 package com.baeldung.ls.project.application.impl;
 
 import com.baeldung.ls.project.application.ProjectService;
+import com.baeldung.ls.project.application.command.CreateProjectCommand;
 import com.baeldung.ls.project.database.IProjectRepository;
 import com.baeldung.ls.project.domain.Project;
 import com.baeldung.ls.task.TaskNotSavedException;
@@ -53,8 +54,8 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public Project save(Project project) {
-        return projectRepository.save(project);
+    public Project save(CreateProjectCommand command) {
+        return projectRepository.save(command.toProject());
     }
 
     @Override
