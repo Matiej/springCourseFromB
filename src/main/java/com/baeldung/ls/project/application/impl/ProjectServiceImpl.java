@@ -1,6 +1,6 @@
 package com.baeldung.ls.project.application.impl;
 
-import com.baeldung.ls.project.application.IProjectService;
+import com.baeldung.ls.project.application.ProjectService;
 import com.baeldung.ls.project.database.IProjectRepository;
 import com.baeldung.ls.project.domain.Project;
 import com.baeldung.ls.task.TaskNotSavedException;
@@ -17,7 +17,7 @@ import java.util.Optional;
 import java.util.Set;
 
 @Service
-public class ProjectServiceImpl implements IProjectService {
+public class ProjectServiceImpl implements ProjectService {
 
     private final IProjectRepository projectRepository;
     private final TaskService taskService;
@@ -38,7 +38,7 @@ public class ProjectServiceImpl implements IProjectService {
 
         Task task1 = new Task("Task_2", "Task 2 for super Project1", LocalDate.now().plusWeeks(4), TaskStatus.NEW);
 //        Task savedTask = taskService.save(task1);
-        Task savedTask = taskService.saveWithCustomCheckedException(task1);
+        Task savedTask = taskService.save(task1);
 
         Set<Task> tasks = new HashSet<>();
         tasks.add(savedTask);

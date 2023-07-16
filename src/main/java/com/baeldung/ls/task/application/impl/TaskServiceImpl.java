@@ -18,8 +18,8 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public Task save(Task task) {
-        throw new RuntimeException("Unable to save task - for test @transactional");
-        //return repository.save(task);
+//        throw new RuntimeException("Unable to save task - for test @transactional");
+        return repository.save(task);
     }
 
     @Override
