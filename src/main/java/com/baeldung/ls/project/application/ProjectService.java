@@ -1,5 +1,6 @@
 package com.baeldung.ls.project.application;
 
+import com.baeldung.ls.project.application.command.CreateProjectCommand;
 import com.baeldung.ls.project.domain.Project;
 import com.baeldung.ls.task.TaskNotSavedException;
 
@@ -10,7 +11,7 @@ public interface ProjectService {
     void createProjectWithTask() throws TaskNotSavedException;
     Optional<Project> findById(Long id);
 
-    Project save(Project project);
+    Project save(CreateProjectCommand createProjectCommand);
 
     List<Project> findAll();
 }
