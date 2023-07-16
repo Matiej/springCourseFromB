@@ -6,7 +6,7 @@ import com.baeldung.ls.task.TaskNotSavedException;
 import java.util.List;
 import java.util.Optional;
 
-public interface IProjectService {
+public interface ProjectService {
     void createProjectWithTask() throws TaskNotSavedException;
     Optional<Project> findById(Long id);
 

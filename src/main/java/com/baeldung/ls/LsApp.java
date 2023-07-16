@@ -1,6 +1,6 @@
 package com.baeldung.ls;
 
-import com.baeldung.ls.project.application.IProjectService;
+import com.baeldung.ls.project.application.ProjectService;
 import com.baeldung.ls.task.application.TaskService;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,7 @@ public class LsApp implements CommandLineRunner {
     }
 
     @Autowired
-    private IProjectService projectService;
+    private ProjectService projectService;
 
     @Autowired
     private TaskService taskService;
