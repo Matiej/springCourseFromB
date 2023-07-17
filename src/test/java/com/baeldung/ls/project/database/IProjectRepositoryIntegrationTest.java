@@ -15,6 +15,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.test.annotation.DirtiesContext;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -97,7 +98,7 @@ class IProjectRepositoryIntegrationTest extends ProjectRepositoryTestBase {
         otherProject.setName("OtherProject");
         repository.save(otherProject);
         Project myOtherDateProject = prepareMyTestProject();
-        myOtherDateProject.setCreatedAt(LocalDate.of(2010, 1, 15));
+        myOtherDateProject.setCreatedAt(LocalDateTime.of(2010, 1, 15,12,10));
         repository.save(myOtherDateProject);
 
         //when
