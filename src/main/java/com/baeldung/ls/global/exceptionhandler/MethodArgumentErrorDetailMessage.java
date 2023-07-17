@@ -13,4 +13,8 @@ public class MethodArgumentErrorDetailMessage extends ErrorDetailMessage{
     public String getFiledName() {
         return filedName;
     }
+
+    public Object getRejectedValue() {
+        return rejectedValue;
+    }
 }

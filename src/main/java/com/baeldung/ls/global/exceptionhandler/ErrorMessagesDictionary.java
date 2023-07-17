@@ -7,7 +7,8 @@ public enum ErrorMessagesDictionary {
     ENTITY_NOT_FOUND_EX("EntityNotFoundException", "Given argument error=> "),
     METHOD_ARGUMENT_NOT_VALID_EXCEPTION("MethodArgumentNotValidException", "Method arguments error -> "),
     CONSTRAINT_VIOLATION_EXCEPTION("ConstraintViolationException", "Path parameter error. "),
-    VALIDATION_EXCEPTION("ValidationException", "Validation error ->");
+    VALIDATION_EXCEPTION("ValidationException", "Validation error ->"),
+    METHOD_ARGUMENT_MISMATCH_EXCEPTION("MethodArgumentTypeMismatchException", "Method arguments missmatch error-> ");
     private static final String DEFAULT_MESSAGE = "Exception error -> ";
     private String exceptionClassName;
     private String message;
