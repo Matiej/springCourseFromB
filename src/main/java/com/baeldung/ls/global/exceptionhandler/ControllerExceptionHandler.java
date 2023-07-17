@@ -11,6 +11,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.time.LocalDateTime;
@@ -54,6 +55,12 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
         return prepareResponse(HttpStatus.BAD_REQUEST, ex);
     }
 
+    @ExceptionHandler({MethodArgumentTypeMismatchException.class})
+    protected ResponseEntity<Object> handleMethodArgumentTypeMismatchException(MethodArgumentTypeMismatchException ex, WebRequest request) {
+        return prepareResponse(HttpStatus.BAD_REQUEST, ex);
+    }
+
+
     private ResponseEntity<Object> prepareResponse(HttpStatus status, Exception exception) {
         String message = ErrorMessagesDictionary.getValidMessage(exception.getClass().getSimpleName());
         ExceptionHandlerResponse exceptionHandlerResponse = getExceptionHandlerResponse(exception, message, status);
@@ -80,6 +87,11 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
                             ((FieldError) err).getRejectedValue()))
                     .toList();
             exceptionHandlerResponse.setDetails(methodArgumentErrorDetailMessages);
+        } else if (ex instanceof MethodArgumentTypeMismatchException) {
+            MethodArgumentTypeMismatchException err = (MethodArgumentTypeMismatchException) ex;
+            MethodArgumentErrorDetailMessage methodArgumentErrorDetailMessage
+                    = new MethodArgumentErrorDetailMessage(err.getMessage(), err.getName(), err.getValue());
+            exceptionHandlerResponse.setDetails(List.of(methodArgumentErrorDetailMessage));
         } else {
             exceptionHandlerResponse.setDetails(new ArrayList<>(List.of(new ErrorDetailMessage(ex.getMessage()))));
         }

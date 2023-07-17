@@ -31,19 +31,19 @@ public class ProjectController {
     }
 
     @GetMapping(produces = APPLICATION_JSON_VALUE)
-    ResponseEntity<List<Project>> getAllProjects() {
+    ResponseEntity<List<ProjectDto>> getAllProjects() {
         List<Project> projectList = projectService.findAll();
         String name = IllegalArgumentException.class.getSimpleName();
         return prepareResponseForGetAll(projectList);
     }
 
     @GetMapping(value = "/{id}", produces = APPLICATION_JSON_VALUE)
-    ResponseEntity<Project> getProjectById(@PathVariable("id") @NotNull(message = "Project ID vairable can't be null")
+    ResponseEntity<ProjectDto> getProjectById(@PathVariable("id") @NotNull(message = "Project ID vairable can't be null")
                                            @Min(value = 1, message = "Project ID variable mu be greater then zero") Long id) {
         return projectService.findById(id)
                 .map(project -> ResponseEntity.ok()
                         .headers(HttpHeadersFactory.getSuccessfulDefaultHeaders(HttpStatus.OK, HttpMethod.GET))
-                        .body(project))
+                        .body(ProjectDto.convertToProjectDto(project)))
                 .orElse(ResponseEntity.notFound()
                         .header(HeaderCustomKey.STATUS.getHeaderKeyLabel(), HttpStatus.NOT_FOUND.name())
                         .header(HeaderCustomKey.MESSAGE.getHeaderKeyLabel(), "Project with ID: " + id + " not found!")
@@ -68,10 +68,10 @@ public class ProjectController {
                 .toUri();
     }
 
-    private ResponseEntity<List<Project>> prepareResponseForGetAll(List<Project> projectList) {
+    private ResponseEntity<List<ProjectDto>> prepareResponseForGetAll(List<Project> projectList) {
         return ResponseEntity.ok()
                 .headers(HttpHeadersFactory.getSuccessfulDefaultHeaders(HttpStatus.OK, HttpMethod.GET))
-                .body(projectList);
+                .body(ProjectDto.convertToProjectDtoList(projectList));
     }
 
 
