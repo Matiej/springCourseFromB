@@ -29,22 +29,22 @@ public class LsApp implements CommandLineRunner {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    @PostConstruct
-    public void postConstruct() {
-        try {
-            projectService.createProjectWithTask();
-        } catch (Exception e) {
-            LOG.error("Error occurred in creating project with tasks", e);
-        }
-
-        LOG.info("Fetching all Projects");
-        projectService.findAll()
-                .forEach(p -> LOG.info(p.toString()));
-
-        LOG.info("Fetching all tasks");
-        taskService.findAll()
-                .forEach(t -> LOG.info(t.toString()));
-    }
+//    @PostConstruct
+//    public void postConstruct() {
+//        try {
+//            projectService.createProjectWithTask();
+//        } catch (Exception e) {
+//            LOG.error("Error occurred in creating project with tasks", e);
+//        }
+//
+//        LOG.info("Fetching all Projects");
+//        projectService.findAll()
+//                .forEach(p -> LOG.info(p.toString()));
+//
+//        LOG.info("Fetching all tasks");
+//        taskService.findAll()
+//                .forEach(t -> LOG.info(t.toString()));
+//    }
 
 
     @Override

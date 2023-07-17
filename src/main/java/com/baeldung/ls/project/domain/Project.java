@@ -4,6 +4,7 @@ import com.baeldung.ls.jpa.BaseEntity;
 import com.baeldung.ls.task.domain.Task;
 import jakarta.persistence.*;
 
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -13,7 +14,7 @@ public class Project extends BaseEntity {
     private String name;
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "project_id")
-    private Set<Task> tasks;
+    private Set<Task> tasks = new HashSet<>();
 
     public Project() {
     }
