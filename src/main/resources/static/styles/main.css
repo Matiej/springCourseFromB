@@ -1,0 +1,21 @@
+table, th, td {
+  border: 2px solid #EAE5E4;
+  border-collapse: collapse;
+  table-layout: fixed;
+  margin: 0 auto;
+}
+th, td {
+  background-color: #3C1007;
+  text-align: center;
+}
+
+th {
+  color: #F5EFEE ;
+  }
+
+.container {
+ margin: auto;
+  width: 60%;
+
+  padding: 10px;
+}
