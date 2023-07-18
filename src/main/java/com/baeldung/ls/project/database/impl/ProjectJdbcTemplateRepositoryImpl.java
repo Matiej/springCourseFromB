@@ -1,7 +1,6 @@
 package com.baeldung.ls.project.database.impl;
 
 import com.baeldung.ls.project.database.ProjectJdbcTemplateRepository;
-import com.baeldung.ls.project.domain.Project;
 import com.baeldung.ls.project.domain.ProjectJdbc;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
