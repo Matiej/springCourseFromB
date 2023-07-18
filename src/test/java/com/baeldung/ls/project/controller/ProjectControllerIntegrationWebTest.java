@@ -31,7 +31,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(SpringExtension.class)
 class ProjectControllerIntegrationWebTest extends ProjectRepositoryTestBase {
     private final Logger LOG = LoggerFactory.getLogger(ProjectControllerIntegrationWebTest.class);
-    private static final String PROJECTS_MAPPING = "/projects";
+    private static final String PROJECTS_MAPPING = "/api/projects";
     private MockMvc mockMvc;
     @MockBean
     private ProjectService projectService;

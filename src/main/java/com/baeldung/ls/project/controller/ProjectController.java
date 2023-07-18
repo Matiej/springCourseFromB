@@ -21,7 +21,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
 @Validated
-@RequestMapping("/projects")
+@RequestMapping("/api/projects")
 public class ProjectController {
     private static final String PROJECTS_PATH = "projects";
     private final ProjectService projectService;

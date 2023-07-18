@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.Thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Projects</title>
+    <link th:href="@{/styles/main.css}" rel="stylesheet"/>
+</head>
+
+<body style="background-color:#BBADAA;">
+
+<div style="text-align: center">
+    <h1 style="color: red;">PROJECTS TABLE</h1>
+    <div class="container">
+        <table>
+            <thead>
+            <tr>
+                <th>Number</th>
+                <th>Project name</th>
+                <th>Created At</th>
+                <th>last Update</th>
+                <th>Number of tasks</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="project,iterStat: ${projects}"
+                th:style="${iterStat.odd}? 'color: green' : 'color: red'">
+                <td th:text="${iterStat.count}"></td>
+                <td th:text="${project.getName()}"></td>
+                <td th:text="${project.createdAt}"></td>
+                <td th:text="${project.lastUpdatedAt}"></td>
+                <td th:text="${project.tasks}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
