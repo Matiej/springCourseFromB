@@ -1,16 +1,8 @@
 package com.baeldung.ls.task.domain;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Version;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
-
-import static java.util.UUID.randomUUID;
 //todo neeed lombok!
 public class TaskDto {
 

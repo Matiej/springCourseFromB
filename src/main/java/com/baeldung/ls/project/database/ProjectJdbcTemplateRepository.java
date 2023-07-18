@@ -1,6 +1,5 @@
 package com.baeldung.ls.project.database;
 
-import com.baeldung.ls.project.domain.Project;
 import com.baeldung.ls.project.domain.ProjectJdbc;
 
 import java.util.Optional;

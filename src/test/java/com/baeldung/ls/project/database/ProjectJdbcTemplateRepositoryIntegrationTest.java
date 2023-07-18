@@ -1,7 +1,6 @@
 package com.baeldung.ls.project.database;
 
 import com.baeldung.ls.project.ProjectRepositoryTestBase;
-import com.baeldung.ls.project.domain.Project;
 import com.baeldung.ls.project.domain.ProjectJdbc;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
