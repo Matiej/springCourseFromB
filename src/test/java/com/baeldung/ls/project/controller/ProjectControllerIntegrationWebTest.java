@@ -69,5 +69,25 @@ class ProjectControllerIntegrationWebTest extends ProjectRepositoryTestBase {
         verifyNoMoreInteractions(projectService);
     }
 
+    @Test
+    @DisplayName("should getAllProjects() NOT perform GET method, given wrong uri and gives back 404coed response")
+    void givenProjects_whenGetAllProjects_thenWrongUir_then404Code_response() throws Exception {
+        //given
+        List<Project> projectList = prepareTestProjects(5);
+
+        //when
+        when(projectService.findAll()).thenReturn(projectList);
+
+        //expect
+        mockMvc.perform(MockMvcRequestBuilders.get(PROJECTS_MAPPING +"/badUri/verybadUri"))
+                .andExpect(status().is(404))
+                .andDo(print())
+                .andReturn();
+
+        //then
+        verify(projectService, times(0)).findAll();
+        verifyNoMoreInteractions(projectService);
+    }
+
 
 }

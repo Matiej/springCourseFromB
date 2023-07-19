@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.Thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Project Page</title>
+    <link th:href="@{/styles/main.css}" rel="stylesheet"/>
+    <style>
+        .butt {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: black;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    }
+
+    </style>
+</head>
+<body>
+<div style="text-align: center; color: blue">
+    <h1>WELCOME TO SUPER BASIC HTML PAGE</h1>
+    <h2>Done and still being made to remember spring framework feauters</h2>
+</div>
+
+<div style="text-align: center;">
+    <a class="butt" th:href="@{/view/projects/add}">Add New Project</a>
+</div>
+
+</body>
+</html>
