@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.Thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add new Project</title>
+    <link th:href="@{/styles/main.css}" rel="stylesheet"/>
+    <style>
+input[type=text], select {
+  width: 50%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+  width: 50%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+div {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+ .butt {
+    background-color: #15C0CB;
+    border: 2px;
+    color: black;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    }
+</style>
+
+</head>
+<body>
+<div style="text-align: center; color: #BB810C ">
+    <h1>CREATE NEW PROJECT</h1>
+    <h2>Done and still being made to remember spring framework features</h2>
+</div>
+<br>
+<br>
+
+<div style="text-align: center;">
+
+    <form  method="POST" th:action="@{/view/projects}" th:object="${project}">
+        <label for="projectName" style="color: blue; font-size: 40px" >Project name:</label><br>
+        <input type="text" id="projectName" name="projectName" placeholder="Enter project name" th:filed="*{projectName}">
+        <br>
+        <button class="butt" type="submit">Save Project</button>
+    </form>
+
+</div>
+
+</body>
+</html>

@@ -26,8 +26,8 @@
                 th:style="${iterStat.odd}? 'color: green' : 'color: red'">
                 <td th:text="${iterStat.count}"></td>
                 <td th:text="${project.getName()}"></td>
-                <td th:text="${project.createdAt}"></td>
-                <td th:text="${project.lastUpdatedAt}"></td>
+                <td th:text="${#temporals.format(project.createdAt, 'yyyy/MM/dd HH:mm:ss')}"></td>
+                <td th:text="${#temporals.format(project.lastUpdatedAt, 'yyyy/MM/dd HH:mm:ss')}"></td>
                 <td th:text="${project.tasks}"></td>
             </tr>
             </tbody>

@@ -38,7 +38,7 @@ public class ProjectController {
     }
 
     @GetMapping(value = "/{id}", produces = APPLICATION_JSON_VALUE)
-    ResponseEntity<ProjectDto> getProjectById(@PathVariable("id") @NotNull(message = "Project ID vairable can't be null")
+    ResponseEntity<ProjectDto> getProjectById(@PathVariable("id") @NotNull(message = "Project ID variable can't be null")
                                            @Min(value = 1, message = "Project ID variable mu be greater then zero") Long id) {
         return projectService.findById(id)
                 .map(project -> ResponseEntity.ok()
