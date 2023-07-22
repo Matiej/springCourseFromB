@@ -1,7 +1,5 @@
 package com.baeldung.ls.global.exceptionhandler;
 
-import org.hibernate.HibernateException;
-
 import java.util.Arrays;
 
 public enum ErrorMessagesDictionary {
