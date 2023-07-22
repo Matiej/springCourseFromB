@@ -60,10 +60,10 @@ div {
 <br>
 
 <div style="text-align: center;">
-
     <form  method="POST" th:action="@{/view/projects}" th:object="${project}">
         <label for="projectName" style="color: blue; font-size: 40px" >Project name:</label><br>
         <input type="text" id="projectName" name="projectName" placeholder="Enter project name" th:filed="*{projectName}">
+        <p th:if="${#fields.hasErrors('projectName')}" th:errors="*{projectName}" style="color: red" />
         <br>
         <button class="butt" type="submit">Save Project</button>
     </form>
