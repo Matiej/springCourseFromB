@@ -11,7 +11,7 @@ public class HttpHeadersFactory {
 
     public static HttpHeaders getSuccessfulDefaultHeaders(HttpStatus status, HttpMethod... allowedMethods) {
         HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.add(HttpHeaders.ACCESS_CONTROL_ALLOW_HEADERS, Arrays.toString(allowedMethods));
+        httpHeaders.add(HttpHeaders.ACCESS_CONTROL_ALLOW_METHODS, Arrays.toString(allowedMethods));
         httpHeaders.add(HeaderCustomKey.STATUS.getHeaderKeyLabel(), status.name());
         httpHeaders.add(HeaderCustomKey.MESSAGE.getHeaderKeyLabel(), SUCCESSFUL);
         return httpHeaders;

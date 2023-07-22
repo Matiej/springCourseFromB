@@ -5,7 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 
 public class RestCreateProjectCommand {
 
-    @NotBlank(message = "Name field can't be blank, empty or null")
+    @NotBlank(message = "Field 'name' can't be blank, empty or null!")
     private String projectName;
 
     public String getProjectName() {

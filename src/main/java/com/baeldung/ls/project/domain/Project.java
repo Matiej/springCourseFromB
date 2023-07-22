@@ -53,12 +53,11 @@ public class Project extends BaseEntity {
         return Objects.hash(super.hashCode(), name);
     }
 
+
     @Override
     public String toString() {
-        return "Project{" +
+        return "Project{" + "'id='" + getId() +
                 "name='" + name + '\'' +
                 '}';
     }
-
-
 }

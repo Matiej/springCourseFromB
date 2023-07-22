@@ -1,5 +1,7 @@
 package com.baeldung.ls.project;
 
+import com.baeldung.ls.project.application.command.CreateProjectCommand;
+import com.baeldung.ls.project.controller.RestCreateProjectCommand;
 import com.baeldung.ls.project.domain.Project;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -10,9 +12,11 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.TestInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpMethod;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public abstract class ProjectRepositoryTestBase {
@@ -42,6 +46,16 @@ public abstract class ProjectRepositoryTestBase {
         return new Project("My test Project");
     }
 
+    protected CreateProjectCommand prepareCreateProjectCommad() {
+        return new CreateProjectCommand("My new Super Project");
+    }
+
+    protected RestCreateProjectCommand prepareRestCommand() {
+        RestCreateProjectCommand restCreateProjectCommand = new RestCreateProjectCommand();
+        restCreateProjectCommand.setProjectName("My new fancy PROJECT");
+        return restCreateProjectCommand;
+    }
+
     protected String jsonInString(Object object) {
 
         ObjectMapper mapper = new ObjectMapper();
@@ -56,5 +70,9 @@ public abstract class ProjectRepositoryTestBase {
             e.printStackTrace();
         }
         return jsonInString;
+    }
+
+    protected String allowedMethods(HttpMethod... methods) {
+        return Arrays.toString(methods);
     }
 }

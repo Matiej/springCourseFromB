@@ -23,7 +23,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @Validated
 @RequestMapping("/api/projects")
 public class ProjectController {
-    private static final String PROJECTS_PATH = "projects";
+    private static final String PROJECTS_PATH = "api/projects";
     private final ProjectService projectService;
 
     public ProjectController(ProjectService projectService) {
@@ -54,7 +54,7 @@ public class ProjectController {
     ResponseEntity<Void> addProject(@Valid @RequestBody RestCreateProjectCommand restCreateProjectCommand) {
         Project savedProject = projectService.save(restCreateProjectCommand.toCreateProjectCommand());
 
-        return ResponseEntity.created(getUri(savedProject.getId()))
+          return ResponseEntity.created(getUri(savedProject.getId()))
                 .headers(HttpHeadersFactory.getSuccessfulDefaultHeaders(HttpStatus.CREATED, HttpMethod.POST))
                 .build();
     }

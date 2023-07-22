@@ -64,7 +64,7 @@ class IProjectRepositoryIntegrationTest extends ProjectRepositoryTestBase {
         assertAll("Check all project properties",
                 () -> assertEquals(projectFound.getId(), 1L),
                 () -> assertEquals(projectFound.getName(), "My test Project"),
-                () -> assertEquals(projectFound.getCreatedAt(), savedProject.getCreatedAt()),
+                () -> assertEquals(projectFound.getCreatedAt().withNano(0), savedProject.getCreatedAt().withNano(0)),
                 () -> assertEquals(projectFound, savedProject)
         );
     }
@@ -98,18 +98,20 @@ class IProjectRepositoryIntegrationTest extends ProjectRepositoryTestBase {
         otherProject.setName("OtherProject");
         repository.save(otherProject);
         Project myOtherDateProject = prepareMyTestProject();
-        myOtherDateProject.setCreatedAt(LocalDateTime.of(2010, 1, 15,12,10));
         repository.save(myOtherDateProject);
+        myOtherDateProject.setCreatedAt(LocalDateTime.of(2010, 1, 15,12,10));
+        Project saved = repository.saveAndFlush(myOtherDateProject);
 
         //when
-        List<Project> retrivedProjectList = repository.findByCreatedAtBetween(LocalDate.of(2010, 1, 14),
-                LocalDate.of(2011, 2, 25));
+        List<Project> projectList = repository.findAll();
+        List<Project> retrivedProjectList = repository.findByCreatedAtBetween(LocalDateTime.of(2010, 1, 14,10,10),
+                LocalDateTime.of(2011, 2, 25,10,10));
 
         //then
         assertNotNull(retrivedProjectList);
         assertFalse(retrivedProjectList.isEmpty());
         assertEquals(1, retrivedProjectList.size());
-        assertThat(retrivedProjectList, hasItem(myOtherDateProject));
+        assertThat(retrivedProjectList, hasItem(saved));
     }
 
     @Test

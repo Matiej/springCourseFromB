@@ -3,6 +3,7 @@ package com.baeldung.ls.global.exceptionhandler;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.ValidationException;
+import org.hibernate.HibernateException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.*;
@@ -24,15 +25,12 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler({Exception.class})
     public final ResponseEntity<Object> handleHibernateException(RuntimeException rex, WebRequest request) {
-        //todo prepared for database, uncoment code to
-//        if (rex instanceof FeignException) {
-//            message = "Gov resource server error. Can not send and receive any report";
-//            log.error(message, rex);
-//        } else if (rex instanceof HibernateException) {
-//            message = "Data Base server error. Can not get or save any report.";
-//            log.error(message, rex);
-//        } else {
-        return prepareResponse(HttpStatus.BAD_REQUEST, rex);
+        HttpStatus status = HttpStatus.SERVICE_UNAVAILABLE;
+        if (rex instanceof HibernateException) {
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+
+        return prepareResponse(status, rex);
     }
 
     @ExceptionHandler({IllegalArgumentException.class, EntityNotFoundException.class})
