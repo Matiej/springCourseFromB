@@ -4,7 +4,7 @@ import com.baeldung.ls.project.application.command.CreateProjectCommand;
 import jakarta.validation.constraints.NotBlank;
 
 public class ViewCreateProjectCommand {
-    @NotBlank(message = "Name field can't be blank, empty or null")
+    @NotBlank(message = "Field 'projectName' can't be blank, empty or null!")
     private String projectName;
 
     public String getProjectName() {
@@ -21,7 +21,7 @@ public class ViewCreateProjectCommand {
 
     @Override
     public String toString() {
-        return "RestCreateProjectCommand{" +
+        return "ViewCreateProjectCommand{" +
                 "projectName='" + projectName + '\'' +
                 '}';
     }
