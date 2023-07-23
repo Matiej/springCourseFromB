@@ -1,7 +1,6 @@
 package com.baeldung.ls.task.controller;
 
 import com.baeldung.ls.global.headerfactory.HttpHeadersFactory;
-import com.baeldung.ls.project.controller.ProjectDto;
 import com.baeldung.ls.task.application.TaskService;
 import com.baeldung.ls.task.domain.Task;
 import jakarta.validation.Valid;

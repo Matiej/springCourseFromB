@@ -1,7 +1,6 @@
 package com.baeldung.ls.task.application.impl;
 
 import com.baeldung.ls.project.application.ProjectService;
-import com.baeldung.ls.project.controller.ProjectViewController;
 import com.baeldung.ls.project.domain.Project;
 import com.baeldung.ls.task.TaskNotSavedException;
 import com.baeldung.ls.task.application.TaskService;
@@ -14,7 +13,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class TaskServiceImpl implements TaskService {

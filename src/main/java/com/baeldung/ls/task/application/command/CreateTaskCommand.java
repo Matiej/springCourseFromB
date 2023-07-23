@@ -2,7 +2,6 @@ package com.baeldung.ls.task.application.command;
 
 import com.baeldung.ls.task.domain.Task;
 import com.baeldung.ls.task.domain.TaskStatus;
-import jakarta.validation.constraints.NotBlank;
 
 import java.time.LocalDate;
 

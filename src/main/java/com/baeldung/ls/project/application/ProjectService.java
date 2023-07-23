@@ -2,7 +2,6 @@ package com.baeldung.ls.project.application;
 
 import com.baeldung.ls.project.application.command.CreateProjectCommand;
 import com.baeldung.ls.project.domain.Project;
-import com.baeldung.ls.task.TaskNotSavedException;
 
 import java.util.List;
 import java.util.Optional;
