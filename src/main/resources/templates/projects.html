@@ -6,10 +6,10 @@
     <link th:href="@{/styles/main.css}" rel="stylesheet"/>
 </head>
 
-<body style="background-color:#BBADAA;">
+<body style="background-color:#C6F0EB;">
 
 <div style="text-align: center">
-    <h1 style="color: red;">PROJECTS TABLE</h1>
+    <h1 style="color: red;">PROJECTS TABLE by Thymeleaf template engine</h1>
     <div class="container">
         <table>
             <thead>
@@ -28,7 +28,17 @@
                 <td th:text="${project.getName()}"></td>
                 <td th:text="${#temporals.format(project.createdAt, 'yyyy/MM/dd HH:mm:ss')}"></td>
                 <td th:text="${#temporals.format(project.lastUpdatedAt, 'yyyy/MM/dd HH:mm:ss')}"></td>
-                <td th:text="${project.tasks}"></td>
+                <td th:unless="${#lists.isEmpty(project.tasks)}">
+                    <ol th:each="task: ${project.tasks}" style="text-align: left;">
+                        <li>Task name: <i th:text="${task.name}"> </i>
+                            <br>
+                            Description: <i th:text="${task.description}"></i>
+                            <br>
+                            Status: <i th:text="${task.status}"></i>
+                        </li>
+                    </ol>
+                </td>
+                <td th:if="${#lists.isEmpty(project.tasks)}">NO TASKS</td>
             </tr>
             </tbody>
         </table>
