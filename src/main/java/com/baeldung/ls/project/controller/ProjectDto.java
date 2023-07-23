@@ -1,7 +1,7 @@
 package com.baeldung.ls.project.controller;
 
 import com.baeldung.ls.project.domain.Project;
-import com.baeldung.ls.task.domain.TaskDto;
+import com.baeldung.ls.task.controller.TaskDto;
 
 import java.time.LocalDateTime;
 import java.util.List;
