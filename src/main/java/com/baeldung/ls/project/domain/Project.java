@@ -39,6 +39,11 @@ public class Project extends BaseEntity {
         this.tasks = tasks;
     }
 
+    public void addTask(Task task) {
+        this.tasks.add(task);
+    }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

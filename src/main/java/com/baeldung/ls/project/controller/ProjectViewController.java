@@ -31,8 +31,17 @@ public class ProjectViewController {
     String getAllProjects(Model model) {
         List<ProjectDto> projectDtoList = ProjectDto.convertToProjectDtoList(projectService.findAll());
         model.addAttribute("projects", projectDtoList);
-        LOG.info("Added to model number: {} of projects", projectDtoList == null ? 0 : projectDtoList.size());
+        LOG.info("Fetched : {} of projects in thymeleaf controller", projectDtoList == null ? 0 : projectDtoList.size());
         return "projects";
+    }
+
+    @GetMapping("/allfm")
+    String getAllProjectsFreeMarker(Model model) {
+        List<ProjectDto> projectDtoList = ProjectDto.convertToProjectDtoList(projectService.findAll());
+        model.addAttribute("projects", projectDtoList);
+        LOG.info("Fetched : {} of projects in freemarker controller", projectDtoList == null ? 0 : projectDtoList.size());
+
+        return "projectsfm";
     }
 
     @GetMapping("/add")

@@ -1,4 +1,6 @@
-package com.baeldung.ls.task.domain;
+package com.baeldung.ls.task.controller;
+
+import com.baeldung.ls.task.domain.Task;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
