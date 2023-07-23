@@ -1,9 +1,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <description>Learn Spring - Project Persistence with Spring Data JPA - Start</description>
-    <name>project-persistence-with-spring-data-jpa-start</name>
+    <description>Learn Spring - project based on Bealdung courses. My own interpretation
+        and development of the material learned on the course</description>
+    <name>All courses will be included into this one project</name>
 
     <groupId>com.baeldung</groupId>
     <artifactId>project-persistence-with-spring-data-jpa-start</artifactId>
@@ -14,7 +15,7 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>3.0.5</version>
-        <relativePath /> <!-- lookup parent from repository -->
+        <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
     <licenses>
@@ -27,13 +28,18 @@
 
     <developers>
         <developer>
+            <email>maciek.wojcik179@gmail.com</email>
+            <name>Maciej Wójcik</name>
+            <url>https://github.com/eugenp</url>
+            <id>Matiej</id>
+        </developer>
+        <developer>
             <email>eugen@baeldung.com</email>
             <name>Eugen Paraschiv</name>
             <url>https://github.com/eugenp</url>
             <id>eugenp</id>
         </developer>
     </developers>
-
 
     <dependencies>
         <dependency>
@@ -48,10 +54,20 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jdbc</artifactId>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-freemarker</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-orm</artifactId>
@@ -64,7 +80,7 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>
-<!--            <version>3.0.4</version>-->
+            <!--            <version>3.0.4</version>-->
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
