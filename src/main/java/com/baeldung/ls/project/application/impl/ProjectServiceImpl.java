@@ -4,6 +4,8 @@ import com.baeldung.ls.project.application.ProjectService;
 import com.baeldung.ls.project.application.command.CreateProjectCommand;
 import com.baeldung.ls.project.database.IProjectRepository;
 import com.baeldung.ls.project.domain.Project;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,7 +13,6 @@ import java.util.Optional;
 
 @Service
 public class ProjectServiceImpl implements ProjectService {
-
     private final IProjectRepository projectRepository;
 
     public ProjectServiceImpl(IProjectRepository projectRepository) {
