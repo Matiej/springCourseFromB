@@ -4,7 +4,10 @@ import com.baeldung.ls.task.domain.Task;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
+
 //todo neeed lombok!
 public class TaskDto {
 
@@ -116,5 +119,9 @@ public class TaskDto {
                 task.getDescription(),
                 task.getDueDate(),
                 task.getStatus().name());
+    }
+
+    public static List<TaskDto> convertToListTaskDto(List<Task> taskList) {
+        return taskList.stream().map(TaskDto::convertToTaskDto).collect(Collectors.toList());
     }
 }
