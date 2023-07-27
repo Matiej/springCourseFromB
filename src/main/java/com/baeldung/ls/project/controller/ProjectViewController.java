@@ -2,9 +2,11 @@ package com.baeldung.ls.project.controller;
 
 import com.baeldung.ls.project.application.ProjectService;
 import com.baeldung.ls.project.domain.Project;
+import com.baeldung.ls.project.events.ProjectCreatedEvent;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,9 +24,11 @@ public class ProjectViewController {
     private final Logger LOG = LoggerFactory.getLogger(ProjectViewController.class);
 
     private final ProjectService projectService;
+    private final ApplicationEventPublisher publisher;
 
-    public ProjectViewController(ProjectService projectService) {
+    public ProjectViewController(ProjectService projectService, ApplicationEventPublisher publisher) {
         this.projectService = projectService;
+        this.publisher = publisher;
     }
 
     @GetMapping("/all")
@@ -57,6 +61,7 @@ public class ProjectViewController {
             return "add-project";
         }
         Project createdProject = projectService.save(command.toCreateProjectCommand());
+        publisher.publishEvent(new ProjectCreatedEvent(createdProject.getId()));
         return "redirect:/view/projects/all";
 
 
