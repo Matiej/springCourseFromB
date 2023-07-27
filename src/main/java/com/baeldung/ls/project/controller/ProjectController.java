@@ -33,18 +33,17 @@ public class ProjectController {
     @GetMapping(produces = APPLICATION_JSON_VALUE)
     ResponseEntity<List<ProjectDto>> getAllProjects() {
         List<Project> projectList = projectService.findAll();
-        String name = IllegalArgumentException.class.getSimpleName();
         return prepareResponseForGetAll(projectList);
     }
 
     @GetMapping(value = "/{id}", produces = APPLICATION_JSON_VALUE)
     ResponseEntity<ProjectDto> getProjectById(@PathVariable("id") @NotNull(message = "Project ID variable can't be null")
-                                           @Min(value = 1, message = "Project ID variable mu be greater then zero") Long id) {
+                                              @Min(value = 1, message = "Project ID variable must be greater then zero") Long id) {
         return projectService.findById(id)
                 .map(project -> ResponseEntity.ok()
                         .headers(HttpHeadersFactory.getSuccessfulDefaultHeaders(HttpStatus.OK, HttpMethod.GET))
                         .body(ProjectDto.convertToProjectDto(project)))
-                .orElse(ResponseEntity.notFound()
+                .orElseGet(() -> ResponseEntity.notFound()
                         .header(HeaderCustomKey.STATUS.getHeaderKeyLabel(), HttpStatus.NOT_FOUND.name())
                         .header(HeaderCustomKey.MESSAGE.getHeaderKeyLabel(), "Project with ID: " + id + " not found!")
                         .build());
@@ -54,7 +53,7 @@ public class ProjectController {
     ResponseEntity<Void> addProject(@Valid @RequestBody RestCreateProjectCommand restCreateProjectCommand) {
         Project savedProject = projectService.save(restCreateProjectCommand.toCreateProjectCommand());
 
-          return ResponseEntity.created(getUri(savedProject.getId()))
+        return ResponseEntity.created(getUri(savedProject.getId()))
                 .headers(HttpHeadersFactory.getSuccessfulDefaultHeaders(HttpStatus.CREATED, HttpMethod.POST))
                 .build();
     }

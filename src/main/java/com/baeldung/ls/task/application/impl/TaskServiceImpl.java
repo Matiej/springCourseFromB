@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TaskServiceImpl implements TaskService {
@@ -38,7 +39,6 @@ public class TaskServiceImpl implements TaskService {
                     return savedTask;
                 })
                 .orElseThrow(() -> new IllegalArgumentException("Can't find project ID:" + command.getProjectId()));
-
     }
 
     @Override
@@ -51,5 +51,10 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public List<Task> findAll() {
         return repository.findAll();
+    }
+
+    @Override
+    public Optional<Task> findById(Long id) {
+        return repository.findById(id);
     }
 }

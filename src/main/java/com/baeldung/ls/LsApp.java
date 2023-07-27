@@ -8,8 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.jdbc.core.JdbcTemplate;
+
+import java.sql.PreparedStatement;
 
 @EnableJpaAuditing
 @SpringBootApplication
@@ -48,6 +51,18 @@ public class LsApp implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        jdbcTemplate.execute("CREATE TABLE projectjdbc(id SERIAL, name VARCHAR(255), date_created DATE)");
+        if(!isTableExists("projectjdbc")) {
+            jdbcTemplate.execute("CREATE TABLE projectjdbc(id SERIAL, name VARCHAR(255), date_created DATE)");
+        }
+    }
+
+    private boolean isTableExists(String tableName) {
+        String query = "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = ? AND table_name = ?";
+        try {
+            Integer count = jdbcTemplate.queryForObject(query, new Object[]{ "learn-spring-database", tableName }, Integer.class);
+            return count != null && count > 0;
+        } catch (EmptyResultDataAccessException e) {
+            return false;
+        }
     }
 }
