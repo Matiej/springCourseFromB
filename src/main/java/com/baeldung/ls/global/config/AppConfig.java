@@ -1,4 +1,4 @@
-package com.baeldung.ls.config;
+package com.baeldung.ls.global.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
