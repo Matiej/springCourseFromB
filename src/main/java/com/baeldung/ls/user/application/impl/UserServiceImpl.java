@@ -8,6 +8,7 @@ import com.baeldung.ls.user.domain.Role;
 import com.baeldung.ls.user.domain.RoleType;
 import com.baeldung.ls.user.domain.UserEntity;
 import jakarta.transaction.Transactional;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -20,17 +21,19 @@ import java.util.stream.Collectors;
 class UserServiceImpl implements UserService {
     private final UserRepository repository;
     private final RoleService roleService;
+    private final PasswordEncoder encoder;
 
-    public UserServiceImpl(UserRepository repository, RoleService roleService) {
+    public UserServiceImpl(UserRepository repository, RoleService roleService, PasswordEncoder encoder) {
         this.repository = repository;
         this.roleService = roleService;
+        this.encoder = encoder;
     }
 
     @Transactional
     @Override
     public UserEntity save(CreateUserCommand command) {
         Set<Role> roles = prepareRoles(command.getRoles());
-        UserEntity userEntity = command.toUserEntity(roles);
+        UserEntity userEntity = command.toUserEntity(roles, encoder);
         return repository.save(userEntity);
     }
 
