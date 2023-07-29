@@ -1,4 +1,4 @@
-package com.baeldung.ls.jpa;
+package com.baeldung.ls.global.jpa;
 
 import jakarta.persistence.*;
 import org.springframework.data.annotation.CreatedDate;
