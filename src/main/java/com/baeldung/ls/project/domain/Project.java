@@ -1,6 +1,6 @@
 package com.baeldung.ls.project.domain;
 
-import com.baeldung.ls.jpa.BaseEntity;
+import com.baeldung.ls.global.jpa.BaseEntity;
 import com.baeldung.ls.task.domain.Task;
 import jakarta.persistence.*;
 
