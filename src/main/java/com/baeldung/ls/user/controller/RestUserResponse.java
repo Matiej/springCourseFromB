@@ -2,12 +2,10 @@ package com.baeldung.ls.user.controller;
 
 import com.baeldung.ls.user.domain.Role;
 import com.baeldung.ls.user.domain.UserEntity;
-import jakarta.persistence.*;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class RestUserResponse {

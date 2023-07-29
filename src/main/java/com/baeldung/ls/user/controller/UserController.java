@@ -2,7 +2,6 @@ package com.baeldung.ls.user.controller;
 
 import com.baeldung.ls.global.headerfactory.HeaderCustomKey;
 import com.baeldung.ls.global.headerfactory.HttpHeadersFactory;
-import com.baeldung.ls.task.controller.TaskDto;
 import com.baeldung.ls.user.application.UserService;
 import com.baeldung.ls.user.domain.UserEntity;
 import jakarta.validation.Valid;
@@ -13,12 +12,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.resource.ResourceUrlEncodingFilter;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @Validated

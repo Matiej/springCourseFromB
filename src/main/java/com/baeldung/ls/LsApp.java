@@ -12,8 +12,6 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import java.sql.PreparedStatement;
-
 @EnableJpaAuditing
 @SpringBootApplication
 public class LsApp implements CommandLineRunner {
