@@ -1,6 +1,6 @@
 package com.baeldung.ls.task.domain;
 
-import com.baeldung.ls.jpa.BaseEntity;
+import com.baeldung.ls.global.jpa.BaseEntity;
 import jakarta.persistence.Entity;
 
 import java.time.LocalDate;

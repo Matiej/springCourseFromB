@@ -1,13 +1,10 @@
 package com.baeldung.ls.project.events;
 
 import com.baeldung.ls.project.application.ProjectService;
-import com.baeldung.ls.project.domain.Project;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
-
-import java.util.Optional;
 
 @Component
 public class ProjectCreatedEventListener {
