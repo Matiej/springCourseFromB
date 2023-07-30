@@ -11,6 +11,7 @@ public interface ProjectService {
     Optional<Project> findById(Long id);
 
     Project save(CreateProjectCommand createProjectCommand);
+    Project save(Project project);
 
     Project update(Project project);
 
