@@ -12,7 +12,6 @@ import java.util.Optional;
 public class RoleServiceImpl implements RoleService {
     private final RoleRepository repository;
 
-
     public RoleServiceImpl(RoleRepository repository) {
         this.repository = repository;
     }
@@ -26,5 +25,10 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public Optional<Role> findRoleByName(String roleName) {
         return repository.findRoleByRoleEqualsIgnoreCase(roleName);
+    }
+
+    @Override
+    public Role addRole(Role role) {
+        return repository.save(role);
     }
 }

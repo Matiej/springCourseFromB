@@ -9,7 +9,11 @@ public enum ErrorMessagesDictionary {
     CONSTRAINT_VIOLATION_EXCEPTION("ConstraintViolationException", "Path parameter error. "),
     VALIDATION_EXCEPTION("ValidationException", "Validation error ->"),
     METHOD_ARGUMENT_MISMATCH_EXCEPTION("MethodArgumentTypeMismatchException", "Method arguments missmatch error-> "),
-    HIBERNATE_EXCEPTION("HibernateException", "Data Base server error. Can not get or save any report." );
+    HIBERNATE_EXCEPTION("HibernateException", "Data Base server error. Can not get or save any report." ),
+    INTEGRITY_CONSTRAINT_VIOLATION_EXCEPTION ("IntegrityConstraintViolationException", "Unique index or primary key violation!"),
+    DATA_INTEGRITY_VIOLATION_EXCEPTION ("DataIntegrityViolationException", "Unique index or primary key violation!"),
+    BAD_CREDENTIALS("BadCredentialsException", "Bad credentials!!");
+
 
     private static final String DEFAULT_MESSAGE = "Exception error -> ";
     private String exceptionClassName;

@@ -3,9 +3,13 @@ package com.baeldung.ls.security;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -26,19 +30,19 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.csrf().disable();
-        http.headers().frameOptions().disable();
+        http.headers().frameOptions().sameOrigin();
         http
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
-                .authorizeHttpRequests()
-                .requestMatchers("/login*").permitAll()
-                .requestMatchers("/h2-console/**", "/", "/h2-console").permitAll()
-                .requestMatchers(REST_PATH).permitAll()
-//                .requestMatchers(HttpMethod.POST, "/api/users/**").hasRole("ADMIN")
-//                .requestMatchers(REST_PATH + "/admin").hasRole("ADMIN")
-                .anyRequest().authenticated()
-                .and().formLogin().defaultSuccessUrl("/", true);
+                .cors(Customizer.withDefaults())
+                .csrf(AbstractHttpConfigurer::disable)
+                .authorizeHttpRequests((authz) -> authz
+                        .requestMatchers("/").permitAll()
+                        .requestMatchers("/h2-console/**").permitAll()
+                        .requestMatchers("/login/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, REST_PATH).permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/users/**").hasAnyRole("ADMIN", "MANAGER")
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .anyRequest().authenticated())
+                .formLogin();
         return http.build();
     }
 
@@ -57,5 +61,10 @@ public class SecurityConfig {
                 .roles("ADMIN")
                 .build();
         return new InMemoryUserDetailsManager(user, manager, admin);
+    }
+
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
+        return authConfig.getAuthenticationManager();
     }
 }
