@@ -3,10 +3,13 @@ package com.baeldung.ls.global.exceptionhandler;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.ValidationException;
+import org.h2.jdbc.JdbcSQLIntegrityConstraintViolationException;
 import org.hibernate.HibernateException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.*;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -38,9 +41,15 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
         return prepareResponse(HttpStatus.BAD_REQUEST, rex);
     }
 
-    @ExceptionHandler({ConstraintViolationException.class, org.hibernate.exception.ConstraintViolationException.class})
+    @ExceptionHandler({ConstraintViolationException.class, org.hibernate.exception.ConstraintViolationException.class,
+            JdbcSQLIntegrityConstraintViolationException.class, DataIntegrityViolationException.class})
     public final ResponseEntity<Object> handleConstraintViolationException(RuntimeException rex, WebRequest request) {
         return prepareResponse(HttpStatus.BAD_REQUEST, rex);
+    }
+
+    @ExceptionHandler({BadCredentialsException.class})
+    public final ResponseEntity<Object> badCredentialsExceptionException(BadCredentialsException rex, WebRequest request) {
+        return prepareResponse(HttpStatus.UNAUTHORIZED, rex);
     }
 
     @Override
@@ -65,7 +74,7 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
         LOG.error(message, exception);
         return ResponseEntity.status(status)
                 .contentType(MediaType.APPLICATION_JSON)
-                .headers(getExceptionHeaders(status.name(), exception.getMessage()))
+                .headers(getExceptionHeaders(status.name(), message))
                 .body(exceptionHandlerResponse);
     }
 
